@@ -26,10 +26,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private List<Notes> allNotes;
     List<Notes> copyAllNotes;
     private DataBaseHelper databaseHelper;
-    AlarmManager alarm;
-    PendingIntent alarmIntent;
     int switchButtonStatus;
-    long currentMilliSecond;
     public CustomAdapter(Context context, List<Notes> allNotes){
         this.context = context;
         this.allNotes = allNotes;
@@ -63,6 +60,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }else {
 
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,allNotes.get(position).getWaktoName() , Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 //        holder.switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

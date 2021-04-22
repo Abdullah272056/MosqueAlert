@@ -1,6 +1,8 @@
 package com.example.mosquealert;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -16,16 +18,48 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+RecyclerView recyclerView;
 
     DataBaseHelper dataBaseHelper;
+    CustomAdapter customAdapter;
+    private List<Notes> dataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recyclerView=findViewById(R.id.recyclerViewId);
         dataBaseHelper=new DataBaseHelper(MainActivity.this);
         dataBaseHelper.getWritableDatabase();
+        loadData();
     }
-   
+    private void loadData(){
+        dataList  = new ArrayList<>();
+        dataList = dataBaseHelper.getAllNotes();
+
+
+        if (dataList.size() > 0){
+            customAdapter = new CustomAdapter(MainActivity.this,dataList);
+            recyclerView.setAdapter(customAdapter);
+            customAdapter.notifyDataSetChanged();
+            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+        }else {
+            for (int i = 0; i <=5; i++) {
+                int id=dataBaseHelper.insertData(new Notes("Wakto Name","0:00 AM","0 Minute","00",
+                        "00","www",0));
+                if (id!=0){
+                    Toast.makeText(this, "success "+String.valueOf(i), Toast.LENGTH_SHORT).show();
+                }
+            }
+            dataList  = new ArrayList<>();
+            dataList = dataBaseHelper.getAllNotes();
+            customAdapter = new CustomAdapter(MainActivity.this,dataList);
+            recyclerView.setAdapter(customAdapter);
+            customAdapter.notifyDataSetChanged();
+            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        }
+    }
 }

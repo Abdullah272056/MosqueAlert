@@ -2,7 +2,7 @@ package com.example.mosquealert;
 
 public class Constant {
     public  static final String DATABASE_NAME="Reminder.db";
-    public  static final int DATABASE_Version=1;
+    public  static final int DATABASE_Version=2;
     public  static final String TABLE_NAME="MosQueInFormation";
     public  static final String COLUMN_ID="id";
     public  static final String COLUMN_WAKTO_NAME="WaktoName";

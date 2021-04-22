@@ -60,6 +60,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public int insertData(Notes notes){
         SQLiteDatabase sqLiteDatabase=getWritableDatabase();
         ContentValues contentValues=new ContentValues();
+        contentValues.put(Constant.COLUMN_WAKTO_NAME,notes.getWaktoName());
         contentValues.put(Constant.COLUMN_START_TIME,notes.getStartTime());
         contentValues.put(Constant.COLUMN_END_TIME,notes.getEntTime());
         contentValues.put(Constant.COLUMN_START_TIME_MILLI,notes.getStartTimeMilli());
