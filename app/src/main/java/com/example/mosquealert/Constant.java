@@ -16,7 +16,7 @@ public class Constant {
 
     public static final String CREATE_TABLE  = " CREATE TABLE "+TABLE_NAME+"("
             +COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-            +COLUMN_START_TIME+" COLUMN_WAKTO_NAME, "
+            +COLUMN_WAKTO_NAME+" TEXT, "
             +COLUMN_START_TIME+" TEXT, "
             +COLUMN_END_TIME+" TEXT, "
             +COLUMN_START_TIME_MILLI+" TEXT, "
