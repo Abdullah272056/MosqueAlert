@@ -20,28 +20,31 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CustomAdapter.OnContactClickListener{
 RecyclerView recyclerView;
 
     DataBaseHelper dataBaseHelper;
     CustomAdapter customAdapter;
     private List<Notes> dataList;
+
+    CustomAdapter.OnContactClickListener onContactClickListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        onContactClickListener=this;
         recyclerView=findViewById(R.id.recyclerViewId);
         dataBaseHelper=new DataBaseHelper(MainActivity.this);
         dataBaseHelper.getWritableDatabase();
-        loadData();
+        loadData(onContactClickListener);
     }
-    private void loadData(){
+    private void loadData(CustomAdapter.OnContactClickListener onContactClickListener){
         dataList  = new ArrayList<>();
         dataList = dataBaseHelper.getAllNotes();
 
 
         if (dataList.size() > 0){
-            customAdapter = new CustomAdapter(MainActivity.this,dataList);
+            customAdapter = new CustomAdapter(MainActivity.this,dataList,onContactClickListener);
             recyclerView.setAdapter(customAdapter);
             customAdapter.notifyDataSetChanged();
             recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -56,10 +59,15 @@ RecyclerView recyclerView;
             }
             dataList  = new ArrayList<>();
             dataList = dataBaseHelper.getAllNotes();
-            customAdapter = new CustomAdapter(MainActivity.this,dataList);
+            customAdapter = new CustomAdapter(MainActivity.this,dataList,onContactClickListener);
             recyclerView.setAdapter(customAdapter);
             customAdapter.notifyDataSetChanged();
             recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         }
+    }
+
+    @Override
+    public void onContactClick(int position) {
+        Toast.makeText(this, "position", Toast.LENGTH_SHORT).show();
     }
 }

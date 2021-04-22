@@ -22,8 +22,7 @@ public class NotificationReceiver extends BroadcastReceiver{
         int mod=audioManager.getRingerMode();
         if (mod== AudioManager.RINGER_MODE_NORMAL){
             audioManager.setRingerMode(1);
-        }else if (mod==AudioManager.RINGER_MODE_VIBRATE){
-            audioManager.setRingerMode(2);
+           // audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
         }
         else {
             Toast.makeText(context, "no change", Toast.LENGTH_SHORT).show();
@@ -35,7 +34,6 @@ public class NotificationReceiver extends BroadcastReceiver{
 
         //String message=intent.getStringExtra("todo");
         NotificationManager notificationManager= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        int notificationI = 100;
         String channelId = "channel-01";
         String channelName = "Channel Name";
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -59,7 +57,7 @@ public class NotificationReceiver extends BroadcastReceiver{
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setAutoCancel(true);
         notificationManager.notify(notificationRequest,builder.build());
-        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
 
 
 

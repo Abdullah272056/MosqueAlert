@@ -11,7 +11,7 @@
         android:layout_margin="15dp"
         android:hint="Enter a wakto name"
         android:layout_marginTop="20dp"
-        android:id="@+id/nameEditTextId"
+        android:id="@+id/waktoNameEditTextId"
         android:textSize="25sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
